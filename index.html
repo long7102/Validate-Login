@@ -53,6 +53,29 @@
                 <span class="form-message"></span>
             </div>
 
+            <div class="form-group">
+                <label for="province" class="form-label">Tỉnh/ Thành phố sinh sống</label>
+                <select id="province" name="province" class="form-control">
+                    <option value="">---Chọn tỉnh/thành phố---</option>
+                    <option value="hn">Hà Nội</option>
+                    <option value="hy">Hưng Yên</option>
+                    <option value="hd">Hà Đông </option>
+                    <option value="ht">Hà Tây</option>
+                    <option value="hu">Huế</option>
+                    <option value="hcm">Hồ Chí Minh</option>
+                    </select>
+
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group radio">
+                <label for="radio" class="form-label">Giới tính</label>
+                <div style="display: flex;">
+                    <input name="gender" value="male" type="radio" class="form-control"><h3 style="margin-right: 15px">Nam</h3>
+                    <input name="gender" value="female" type="radio" class="form-control"><h3>Nữ</h3>
+                </div>
+                <span class="form-message"></span>
+            </div>
             <button class="form-submit">Đăng ký</button>
         </form>
 
@@ -62,12 +85,22 @@
     <script>
         Validator({
             form: '#form-1',
+            formGroupSelector: '.form-group',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#fullname'),
+                Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ của bạn'),
                 Validator.isEmail('#email'),
-                Validator.minLength('#password', 6)
-            ]
+                Validator.minLength('#password', 6),
+                Validator.isRequired('#password_confirmation'),
+                Validator.isRequired('input[name="gender"]'),
+                Validator.isRequired('#province'),
+                Validator.isConfirmed('#password_confirmation', function () {
+                    return document.querySelector('#form-1 #password').value
+                }, 'Xác nhận mật khẩu phải trùng khớp với mật khẩu')
+            ],
+            onsubmit: function (data) {
+                console.log(data)
+            }
         })
     </script>
 </body>
