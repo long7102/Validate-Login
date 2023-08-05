@@ -49,7 +49,13 @@
             <div class="form-group">
                 <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
                 <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu"
-                    type="password" class="form-control">
+  type="password" class="form-control">
+                <span class="form-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="file" class="form-label">Ảnh đại diện</label>
+                <input id="file" name="file" type="file" class="form-control" style="background-color: white;">
                 <span class="form-message"></span>
             </div>
 
@@ -104,6 +110,7 @@
                 Validator.isRequired('#password_confirmation'),
                 Validator.isRequired('input[name="gender"]'),
                 Validator.isRequired('input[name="course"]'),
+                Validator.isRequired('input[name="file"]'),
                 Validator.isRequired('#province'),
                 Validator.isConfirmed('#password_confirmation', function () {
                     return document.querySelector('#form-1 #password').value
